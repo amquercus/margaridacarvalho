@@ -7,7 +7,148 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --bg:#FFF1FA; --surface:#FFFFFF; --ink:#2A1252; --muted:#5E4A80;
+  --purple:#7B2FF7; --pink:#F0229E; --lilac:#EBDDFF; --peach:#FFB36B; --line:#EBCBF2; --bar:#EBDDFF;
+  --hero1:#F0229E; --hero2:#7B2FF7;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A0B33; --surface:#2A1552; --ink:#FFEAF8; --muted:#CDB8EE;
+    --purple:#A77BFF; --pink:#FF5CC0; --lilac:#43287A; --line:#43287A; --bar:#43287A;
+    --hero1:#C21A80; --hero2:#5A1FC4;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A0B33; --surface:#2A1552; --ink:#FFEAF8; --muted:#CDB8EE;
+  --purple:#A77BFF; --pink:#FF5CC0; --lilac:#43287A; --line:#43287A; --bar:#43287A;
+  --hero1:#C21A80; --hero2:#5A1FC4;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:1.0625rem;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.08;margin:0}
+:focus-visible{outline:3px solid var(--peach);outline-offset:3px}
+a{color:inherit}
+.wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem}
+[hidden]{display:none!important}
+
+/* switch */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:center;padding:.75rem}
+.switch{display:inline-flex;background:var(--surface);border:2px solid var(--line);border-radius:99px;padding:.25rem;box-shadow:0 4px 18px rgba(123,47,247,.18)}
+.switch button{font:inherit;font-weight:600;border:0;background:none;color:var(--ink);padding:.55rem 1.25rem;border-radius:99px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff}
+
+/* about */
+.hero{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;position:relative;overflow:hidden;padding:3.5rem 0 4.5rem;margin-top:-4rem;padding-top:7rem;border-radius:0 0 3rem 3rem}
+.hero .blob{position:absolute;border-radius:50%;background:#fff;opacity:.2;width:22rem;height:22rem;right:-6rem;top:-6rem}
+.hero .blob.two{width:12rem;height:12rem;right:20%;top:auto;bottom:-5rem;background:var(--peach);opacity:.4}
+.hero .wrap{position:relative}
+@media (max-width:44rem){.hero .wrap{grid-template-columns:1fr}.hero .pic{order:-1;max-width:11rem}}
+.pic{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+h1{font-size:clamp(2.6rem,8vw,5.2rem);font-weight:800;letter-spacing:-.02em}
+.lede{font-size:1.25rem;max-width:34rem;margin:1.25rem 0 1.5rem;color:#FFEAF8}
+.houses{display:grid;grid-template-columns:repeat(12,1fr);gap:.35rem;max-width:22rem}
+.houses svg{width:100%;height:auto;fill:rgba(255,255,255,.28)}
+.houses svg.on{animation:light .5s forwards;animation-delay:calc(var(--i)*100ms)}
+@keyframes light{to{fill:#fff}}
+.houses svg:nth-child(3n).on{animation-name:light2}
+@keyframes light2{to{fill:var(--peach)}}
+.caption{font-size:.95rem;margin:.6rem 0 0;color:#FFEAF8}
+section{padding:3rem 0}
+h2{font-size:clamp(1.8rem,4.5vw,2.7rem);font-weight:800;margin-bottom:1.25rem}
+.grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.type{border-radius:1.75rem;padding:1.75rem;color:#fff}
+.type h3{font-size:1.5rem;margin-bottom:.5rem}
+.type p{margin:0}
+.t1{background:linear-gradient(160deg,#F0229E,#B31AA8)}
+.t2{background:linear-gradient(160deg,#7B2FF7,#4B1FB8)}
+.pet{border-radius:1.75rem;padding:1.5rem;color:#fff;min-height:13rem}
+.pet .big{font-size:4rem;line-height:1;display:block;margin-bottom:.75rem}
+.pet h3{font-size:1.5rem;margin-bottom:.3rem}
+.pet p{margin:0}
+.p1{background:linear-gradient(160deg,#F0229E,#B31AA8)}
+.p2{background:linear-gradient(160deg,#7B2FF7,#4B1FB8)}
+.p3{background:linear-gradient(160deg,#C06BFF,#7B2FF7)}
+.scene{border-radius:2rem;overflow:hidden;background:linear-gradient(180deg,#FF8FCB 0%,#FFB36B 55%,#FFE0A8 100%);position:relative}
+.scene svg{display:block;width:100%;height:auto}
+.scene .txt{position:absolute;left:0;top:0;padding:1.75rem;max-width:26rem;color:#2A1252}
+.scene h2{margin-bottom:.5rem;font-size:clamp(1.6rem,4vw,2.4rem)}
+.scene p{margin:0}
+@media (max-width:42rem){.scene .txt{position:static;background:linear-gradient(180deg,#FF8FCB,#FFB36B);max-width:none}}
+.tile{background:var(--surface);border:2px solid var(--line);border-radius:1.75rem;padding:1.75rem}
+.tile h3{font-size:1.4rem;margin:.4rem 0}
+.tile p{margin:0;color:var(--muted)}
+.emo{font-size:2rem}
+.paint{display:flex;gap:.5rem;margin-bottom:.5rem}
+.paint i{width:2.1rem;height:2.1rem;border-radius:50%;display:block}
+
+/* career */
+.chead{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;margin-top:-4rem;padding:7rem 0 2.5rem;border-radius:0 0 3rem 3rem}
+.chead .wrap{display:grid;gap:1.5rem 2rem;grid-template-columns:1fr}
+.chead .pic{border-width:4px}
+.chead h1{font-size:clamp(2.2rem,6vw,3.8rem)}
+.role{font-size:1.2rem;margin:.25rem 0 .75rem;color:#FFEAF8}
+.sum{grid-column:1/-1;margin:0;max-width:52rem;color:#FFEAF8}
+.contact{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;font-size:.98rem;margin-top:.5rem}
+@media (max-width:40rem){.chead .wrap{grid-template-columns:1fr}.chead .pic{max-width:8rem}}
+.cols{display:grid;gap:1.5rem;grid-template-columns:20rem 1fr;padding:2.5rem 0;align-items:start}
+@media (max-width:52rem){.cols{grid-template-columns:1fr}}
+.box{background:var(--surface);border-radius:1.5rem;padding:1.5rem;margin-bottom:1.25rem;border-top:6px solid var(--pink)}
+.box.pu{border-top-color:var(--purple)}.box.pe{border-top-color:var(--peach)}
+.box h2{font-size:1.35rem;margin-bottom:1rem}
+.job{padding:0 0 1.25rem;margin-bottom:1.25rem;border-bottom:1px solid var(--line)}
+.job h3{font-size:1.3rem;color:var(--pink)}
+.job .sub{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-weight:600;color:var(--muted);margin:.15rem 0 .5rem}
+.job ul{margin:0;padding-left:1.15rem}
+.job li{margin-bottom:.35rem}
+.edu{margin-bottom:.9rem}.edu b{display:block}.edu span{color:var(--muted);font-size:.95rem}
+.skill{margin-bottom:.7rem;font-size:.98rem}
+.skill div{height:.5rem;border-radius:99px;background:var(--bar);margin-top:.25rem;overflow:hidden}
+.skill i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--purple))}
+.box ul.plain{margin:0;padding-left:1.15rem}
+.chead{position:relative;overflow:hidden}.chead .wrap{position:relative}
+.chead .blob{position:absolute;border-radius:50%;background:#fff;opacity:.18;width:18rem;height:18rem;right:-5rem;top:-5rem}
+.chead .blob.two{width:9rem;height:9rem;right:22%;top:auto;bottom:-3rem;background:var(--peach);opacity:.45}
+.chead .pic{transform:rotate(-4deg)}
+.stats{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));padding-top:2rem}
+.stat{border-radius:1.5rem;padding:1.1rem 1.25rem;color:#fff;transition:transform .2s}
+.stat:nth-child(odd){transform:rotate(-1.5deg)}.stat:nth-child(even){transform:rotate(1.5deg)}
+.stat:hover{transform:rotate(0) scale(1.04)}
+.stat b{display:block;font-family:"Bricolage Grotesque",Figtree,sans-serif;font-size:2.1rem;line-height:1.05}
+.stat span{font-size:.95rem}
+.s1{background:linear-gradient(160deg,#F0229E,#B31AA8)}.s2{background:linear-gradient(160deg,#7B2FF7,#4B1FB8)}.s3{background:linear-gradient(160deg,#C06BFF,#7B2FF7)}.s4{background:linear-gradient(160deg,#FF8A5C,#F0229E)}
+.box{border-radius:2rem}
+.box h2{font-size:1.5rem}
+.job{background:var(--bg);border:0;border-radius:1.25rem;padding:1.25rem;margin-bottom:1rem;border-left:8px solid var(--pink)}
+.job:nth-of-type(2){border-left-color:var(--purple)}.job:nth-of-type(3){border-left-color:var(--peach)}
+.job h3::before{display:inline-grid;place-items:center;min-width:2.3rem;height:2.3rem;padding:0 .45rem;margin-right:.6rem;border-radius:.7rem;color:#fff;font-size:.9rem;vertical-align:middle;background:var(--pink)}
+.job:nth-of-type(1) h3::before{content:"P"}.job:nth-of-type(2) h3::before{content:"S4";background:var(--purple)}.job:nth-of-type(3) h3::before{content:"EY";background:#E88A2E}
+.job h3{font-size:1.5rem}
+.job li::marker{color:var(--pink)}
+.skill i{box-shadow:0 0 0 2px var(--surface)}
+.skill div{height:.7rem}
+.hlede{max-width:36rem;color:var(--muted);margin:-.5rem 0 1.5rem}
+.happy{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.hc{border-radius:1.75rem;padding:1.6rem;color:#fff;min-height:14rem;transition:transform .2s}
+.hc:hover{transform:translateY(-4px) rotate(-.6deg)}
+.hc .big{font-size:3.2rem;line-height:1;display:block;margin-bottom:.9rem}
+.hc h3{font-size:1.5rem;margin-bottom:.35rem}
+.hc p{margin:0}
+.hc a{color:#fff;text-decoration:underline}
+.g1{background:linear-gradient(160deg,#F0229E,#B31AA8)}
+.g2{background:linear-gradient(160deg,#FF8A5C,#F0229E)}
+.g3{background:linear-gradient(160deg,#7B2FF7,#4B1FB8)}
+.g4{background:linear-gradient(160deg,#C06BFF,#7B2FF7)}
+.g5{background:linear-gradient(160deg,#B31AA8,#4B1FB8)}
+.edu a{color:var(--pink);text-decoration:underline}
+.edu span a{color:var(--muted)}
+footer{padding:1rem 0 4rem;color:var(--muted);text-align:center}
+@media (prefers-reduced-motion:reduce){.houses svg.on{animation:none;fill:#fff}.houses svg:nth-child(3n).on{fill:var(--peach)}}
+</style>
 </head>
 <body>
 <nav class="nav" aria-label="Pages">
@@ -38,32 +179,14 @@
     </div>
   </section>
 
-  <section class="wrap" aria-labelledby="pets">
-    <h2 id="pets">I grew up with animals</h2>
-    <div class="grid">
-      <div class="pet p1"><span class="big" aria-hidden="true">🐕</span><h3>Lola</h3><p>My Jack Russell, with more energy than any of us.</p></div>
-      <div class="pet p2"><span class="big" aria-hidden="true">🐈‍⬛</span><h3>Camões</h3><p>A cat named after the famous Portuguese poet, and he knows it.</p></div>
-    </div>
-  </section>
-
-  <section class="wrap" aria-labelledby="trav">
-    <div class="scene">
-      <svg viewBox="0 0 900 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-        <circle cx="720" cy="120" r="70" fill="#FFF1A8"/>
-        <path d="M0 300 L160 150 L260 240 L380 110 L520 270 L640 190 L780 280 L900 200 L900 420 L0 420Z" fill="#B31AA8"/>
-        <path d="M0 340 L120 250 L240 330 L400 220 L560 335 L720 245 L900 340 L900 420 L0 420Z" fill="#7B2FF7"/>
-        <path d="M0 380 Q120 350 240 380 T480 380 T720 380 T900 380 L900 420 L0 420Z" fill="#2A1252"/>
-        <path d="M0 400 Q120 375 240 400 T480 400 T720 400 T900 400 L900 420 L0 420Z" fill="#F0229E" opacity=".7"/>
-      </svg>
-      <div class="txt"><h2 id="trav">I love to travel</h2><p>Brazil was one of my best trips recently: mountains, beaches and nature everywhere. I travel to be surprised, and to meet people I would never meet at home.</p></div>
-    </div>
-  </section>
-
-  <section class="wrap" aria-labelledby="play">
-    <h2 id="play">People and play</h2>
-    <div class="grid">
-      <div class="tile"><div class="emo" aria-hidden="true">🏃‍♀️👟🎉</div><h3>Run crew co-captain</h3><p>I love meeting new people. With 010 Run Crew in Rotterdam, I help organise social events for the expat community.</p></div>
-      <div class="tile"><div class="paint" aria-hidden="true"><i style="background:#F0229E"></i><i style="background:#7B2FF7"></i><i style="background:#FFB36B"></i><i style="background:#D9C2FF"></i></div><h3>Drawing and painting</h3><p>Being creative keeps my head clear and my eye sharp.</p></div>
+  <section class="wrap" aria-labelledby="happy">
+    <h2 id="happy">Things that make me happy</h2>
+    <p class="hlede">Animals, trips, people and a paintbrush. These are the things I keep coming back to.</p>
+    <div class="happy">
+      <div class="hc g1"><span class="big" aria-hidden="true">🐕🐈‍⬛</span><h3>My animals</h3><p>I grew up with them. Lola, my Jack Russell, has more energy than any of us, and Camões is a cat named after the famous Portuguese poet. He knows it.</p></div>
+      <div class="hc g2"><span class="big" aria-hidden="true">🏜️🌴✈️</span><h3>Travelling</h3><p><b>California:</b> beautiful national parks with raw nature, and a road trip with friends.</p><p style="margin-top:.5rem"><b>Brazil:</b> mountains, beaches and nature everywhere.</p><p style="margin-top:.5rem">I travel to be surprised, and to meet people I would never meet at home.</p></div>
+      <div class="hc g4"><span class="big" aria-hidden="true">🏃‍♀️🎉</span><h3>Meeting people</h3><p>With <a href="https://www.instagram.com/010runcrew" target="_blank" rel="noopener">010 Run Crew</a> in Rotterdam, I co-captain social events for the expat community.</p></div>
+      <div class="hc g5"><span class="big" aria-hidden="true">🎨🖌️</span><h3>Drawing and painting</h3><p>Being creative keeps my head clear and my eye sharp.</p></div>
     </div>
   </section>
 </div>
@@ -77,7 +200,7 @@
         <h1>Margarida Carvalho</h1>
         <p class="role">Senior Data Analyst</p>
         <div class="contact">
-          <a href="https://www.linkedin.com/in/amquercus">LinkedIn: /in/amquercus</a>
+          <a href="https://www.linkedin.com/in/amquercus/" target="_blank" rel="noopener">LinkedIn: /in/amquercus</a>
           <span>Rotterdam, Netherlands</span>
         </div>
       </div>
@@ -94,9 +217,9 @@
   <div class="wrap cols">
     <aside>
       <div class="box pu"><h2>🎓 Education &amp; certification</h2>
-        <div class="edu"><b>Data Analytics certification (2023)</b><span>London School of Economics, London</span></div>
-        <div class="edu"><b>MSc in International Business (2017–2019)</b><span>Copenhagen Business School, Copenhagen</span></div>
-        <div class="edu"><b>BSc in Management (2014–2017)</b><span>Nova School of Business and Economics, Lisbon</span></div>
+        <div class="edu"><b><a href="https://www.lse.ac.uk/study-at-lse/online-learning/courses/data-analytics" target="_blank" rel="noopener">Data Analytics certification (2023)</a></b><span><a href="https://www.lse.ac.uk/study-at-lse/online-learning/about-us" target="_blank" rel="noopener">London School of Economics</a>, London</span></div>
+        <div class="edu"><b>MSc in International Business (2017–2019)</b><span><a href="https://www.cbs.dk/en/about-cbs" target="_blank" rel="noopener">Copenhagen Business School</a>, Copenhagen</span></div>
+        <div class="edu"><b>BSc in Management (2014–2017)</b><span><a href="https://www.novasbe.unl.pt/pt/sobre-nos/um-olhar-sobre-a-nova-sbe" target="_blank" rel="noopener">Nova School of Business and Economics</a>, Lisbon</span></div>
         <div class="edu"><b>Six Sigma DMAIC (ongoing)</b></div>
         <div class="edu"><b>Power BI Data Analyst Associate (ongoing)</b></div>
         <div class="edu"><b>Microsoft Office Specialist (2013)</b></div>
