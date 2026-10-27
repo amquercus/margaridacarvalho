@@ -131,8 +131,8 @@ h2{font-size:clamp(1.8rem,4.5vw,2.7rem);font-weight:800;margin-bottom:1.25rem}
 .job li::marker{color:var(--pink)}
 .skill i{box-shadow:0 0 0 2px var(--surface)}
 .skill div{height:.7rem}
-.hlede{max-width:36rem;color:var(--muted);margin:-.5rem 0 1.5rem}
-.happy{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.hlede{color:var(--muted);margin:-.5rem 0 1.5rem}
+.happy{display:grid;gap:1.25rem;grid-template-columns:repeat(4,1fr)}
 .hc{border-radius:1.75rem;padding:1.6rem;color:#fff;min-height:14rem;transition:transform .2s}
 .hc:hover{transform:translateY(-4px) rotate(-.6deg)}
 .hc .big{font-size:3.2rem;line-height:1;display:block;margin-bottom:.9rem}
@@ -144,6 +144,8 @@ h2{font-size:clamp(1.8rem,4.5vw,2.7rem);font-weight:800;margin-bottom:1.25rem}
 .g3{background:linear-gradient(160deg,#7B2FF7,#4B1FB8)}
 .g4{background:linear-gradient(160deg,#C06BFF,#7B2FF7)}
 .g5{background:linear-gradient(160deg,#B31AA8,#4B1FB8)}
+@media (max-width:48rem){.happy{grid-template-columns:repeat(2,1fr);gap:.75rem}.hc{padding:1rem;min-height:0;border-radius:1.25rem}.hc .big{font-size:2rem;margin-bottom:.5rem}.hc h3{font-size:1.1rem}.hc p{font-size:.85rem;line-height:1.4}}
+@media (min-width:52rem){.cols{align-items:stretch}.cols aside{display:flex;flex-direction:column}.cols aside .box:last-child{flex:1;margin-bottom:0}}
 .edu a{color:var(--pink);text-decoration:underline}
 .edu span a{color:var(--muted)}
 footer{padding:1rem 0 4rem;color:var(--muted);text-align:center}
