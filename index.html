@@ -162,19 +162,19 @@ footer{padding:1rem 0 4rem;color:var(--muted);text-align:center}
 .fade{animation:fadein .4s ease both}
 @keyframes fadein{from{opacity:0;transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){.fade{animation:none}}
-.hero{margin-top:0;padding:4.5rem 0 4.5rem;text-align:center}
+.hero{margin-top:0;padding:3.25rem 0 3.25rem;text-align:center}
 .hero h1{font-size:clamp(2.3rem,7vw,4.6rem);max-width:18ch;margin:0 auto}
-.hcontact{margin:1.25rem 0 0;color:#FFEAF8;font-size:1.05rem}
-.hcontact a{color:#fff;font-weight:600;text-decoration:underline}
-.nav{margin-top:-2.4rem}
-.hintro{margin:1.25rem auto 0;max-width:46rem}
-.hero .lede2{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.3;font-weight:500;color:#fff;margin:0}
-.hero .role{color:#FFD9A8;font-weight:600;font-size:1.25rem;margin:0 0 .5rem}
-.hero .sum{color:#fff;font-size:1.1rem;margin:0}
-html{overflow-y:scroll}
-.hstack{display:grid;max-width:46rem;margin:1.25rem auto 0}
-.hstack>.hintro{grid-area:1/1;margin:0;align-self:center;max-width:none}
-.hintro.off{visibility:hidden}
+.hcontact{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.75rem 1rem;margin:1rem 0 0;color:#FFEAF8;font-size:1.05rem}
+.linkedin{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border:1px solid rgba(255,255,255,.75);border-radius:99px;color:#fff!important;font-weight:600;text-decoration:none;background:rgba(255,255,255,.12)}
+.linkedin:hover{background:rgba(255,255,255,.24)}
+.hero-role{color:#FFD9A8;font-weight:600;font-size:1.25rem;margin:.85rem 0 .35rem}
+.topline{color:#fff;font-size:1rem;font-weight:600;letter-spacing:.01em;margin:.55rem 0 0}
+.nav{margin:0;padding:1.25rem .75rem .5rem;position:relative;top:auto}
+.hintro{margin:0 auto;max-width:46rem}
+.intro-area{padding:1.5rem 0 0}
+.intro-area .lede2{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-size:clamp(1.3rem,2.8vw,1.85rem);line-height:1.3;font-weight:500;max-width:46rem;margin:0}
+.intro-area .sum{font-size:1.1rem;max-width:52rem;margin:.75rem 0 0;color:var(--muted)}
+.hintro.off{display:none}
 </style>
 </head>
 <body>
@@ -182,9 +182,11 @@ html{overflow-y:scroll}
 <header class="hero">
   <div class="blob"></div><div class="blob two"></div>
   <div class="wrap"><h1>Hi, I’m Margarida Carvalho.</h1>
-    <div class="hstack"><div class="hintro" id="i-about"><p class="lede2">I turn ideas into things that actually work. Leader by instinct, finisher by habit, and happiest when I’m with people, animals or somewhere new.</p></div>
-    <div class="hintro off" id="i-career" aria-hidden="true"><p class="role">Senior Data Analyst</p><p class="sum">Senior Data Analyst with 7 years across finance, marketing and sales data analytics and data quality. Turns complex data into decisions that deliver measurable visibility, efficiency and trust in the numbers. Experienced in data quality, KPI governance, dashboarding (Power BI, Qlik Sense) and AI readiness. Strong stakeholder partner, from CFOs to zone and business leaders.</p></div></div>
-    <p class="hcontact"><a href="https://www.linkedin.com/in/amquercus/" target="_blank" rel="noopener">LinkedIn: /in/amquercus</a> · Rotterdam, Netherlands</p></div>
+    <p class="hcontact"><a class="linkedin" href="https://www.linkedin.com/in/amquercus/" target="_blank" rel="noopener">LinkedIn</a><span>Rotterdam, Netherlands</span></p>
+    <p class="hero-role">Senior Data Analyst</p>
+    <p class="topline" id="top-about">Strategic · Direct · Reliable · Improvement-minded</p>
+    <p class="topline" id="top-career" hidden>Power BI · SQL · Data Quality · AI readiness</p>
+  </div>
 </header>
 
 <nav class="nav" aria-label="Pages">
@@ -193,6 +195,11 @@ html{overflow-y:scroll}
     <button type="button" id="b-career" aria-pressed="false">About my career</button>
   </div>
 </nav>
+
+<section class="intro-area wrap" aria-live="polite">
+  <div class="hintro" id="i-about"><p class="lede2">I turn ideas into things that actually work. Leader by instinct, finisher by habit, and happiest when I’m with people, animals or somewhere new.</p></div>
+  <div class="hintro off" id="i-career" aria-hidden="true"><p class="sum">Senior Data Analyst with 7 years across finance, marketing and sales data analytics and data quality. Turns complex data into decisions that deliver measurable visibility, efficiency and trust in the numbers. Experienced in data quality, KPI governance, dashboarding (Power BI, Qlik Sense) and AI readiness. Strong stakeholder partner, from CFOs to zone and business leaders.</p></div>
+</section>
 
 
 <!-- ABOUT ME -->
@@ -292,16 +299,16 @@ html{overflow-y:scroll}
     cur=p;
     var c=p==='career',t=c?C:A;
     A.hidden=c;C.hidden=!c;
-    var iA=document.getElementById('i-about'),iC=document.getElementById('i-career'),it=c?iC:iA;
+    var iA=document.getElementById('i-about'),iC=document.getElementById('i-career'),it=c?iC:iA,
+        topA=document.getElementById('top-about'),topC=document.getElementById('top-career');
     iA.classList.toggle('off',c);iC.classList.toggle('off',!c);iA.setAttribute('aria-hidden',String(c));iC.setAttribute('aria-hidden',String(!c));
+    topA.hidden=c;topC.hidden=!c;
     [t,it].forEach(function(e){e.classList.remove('fade');void e.offsetWidth;e.classList.add('fade');});
     bA.setAttribute('aria-pressed',String(!c));bC.setAttribute('aria-pressed',String(c));
     document.title=c?'Margarida Carvalho – Senior Data Analyst':'Margarida Carvalho';
   }
-  function go(p){try{location.hash=p}catch(e){}show(p)}
-  bA.onclick=function(){go('about')};bC.onclick=function(){go('career')};
-  window.addEventListener('hashchange',function(){show(location.hash==='#career'?'career':'about')});
-  show(location.hash==='#career'?'career':'about');
+  bA.onclick=function(){show('about')};bC.onclick=function(){show('career')};
+  show('about');
 })();
 </script>
 </body>
